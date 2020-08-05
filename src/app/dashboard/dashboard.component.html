@@ -1,0 +1,30 @@
+
+<div style="margin: 20px;">
+  <mat-label mat-dialog-title>Dashboard</mat-label>
+  <mat-card  style="margin: 20px;">
+    <mat-card-header>
+      <mat-card-title>
+        Upcoming Tasks
+        <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item>Expand</button>
+          <button mat-menu-item>Remove</button>
+        </mat-menu>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+    <app-reusabletable
+    *ngIf="data"
+    [topButton]="'Add New Task'" 
+    [tableDataSource]="tabelData.data"
+    [keys]="columns"
+    >
+      
+    </app-reusabletable>
+    </mat-card-content>
+  </mat-card>
+
+ 
+</div>
