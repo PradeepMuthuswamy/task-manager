@@ -39,6 +39,7 @@ export class ReusabletableComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.loadData();
+   
   }
 
   ngOnInit() {

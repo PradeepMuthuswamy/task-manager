@@ -12,15 +12,20 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { NavComponent } from './nav/nav.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { SharedModule } from './shared/shared.module';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     LandingPageComponent,
     ListHomeComponent,
     DashboardComponent,
     NavComponent,
-    TasksComponent
+    TasksComponent,
+    AddTaskComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -28,10 +33,15 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     MaterialModule,
     LayoutModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule
 
   ],
   providers: [],
+  entryComponents:[
+    AddTaskComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

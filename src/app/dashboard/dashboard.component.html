@@ -4,7 +4,7 @@
   <mat-card  style="margin: 20px;">
     <mat-card-header>
       <mat-card-title>
-        Upcoming Tasks
+        All Tasks
         <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -20,6 +20,10 @@
     [topButton]="'Add New Task'" 
     [tableDataSource]="tabelData.data"
     [keys]="columns"
+    [isEdit]="true"
+    [isDelete]="true"
+    (buttonClick)="handleButtonClick($event)"
+    
     >
       
     </app-reusabletable>

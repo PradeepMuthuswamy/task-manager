@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Add New Task</h1>
+<mat-dialog-content>
+    <form [formGroup]="taskForm" class="col">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Ex. Pradeep" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Task</mat-label>
+            <input matInput placeholder="Ex. Barakhana"formControlName="task">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose a date of Completion</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="completion">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        <mat-form-field>
+            <mat-label>Remarks</mat-label>
+            <textarea matInput placeholder="Ex. Raising Day/Battle honour day" formControlName="remarks"></textarea>
+        </mat-form-field>
+    </form >
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-stroked-button color="primary" (click)="closeDialog()">Add</button>
+</mat-dialog-actions>

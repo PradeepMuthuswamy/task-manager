@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { AddTaskComponent } from '../add-task/add-task.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,35 +12,68 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DashboardComponent implements OnInit {
 
-  data=[{
-    name:'Pradeep',
-    task: 'Build App',
-    snoozed: 'No',
-    assigned: '05/08/2020',
-    completion:'20/08/2020',
-    status: 'Ongoing',
-    remarks:'Enterprise app'
-  },
-  {
-    name:'Pradeep',
-    task: 'Wire frame & Analyze reqmt',
-    snoozed: 'No',
-    assigned: '04/08/2020',
-    completion:'05/08/2020',
-    status: 'Completed',
-    remarks:'Tasks App'
-  }
-];
+  data = [
+  ];
 
-  ngOnInit(){
+  ngOnInit() {
     this.tabelData = new MatTableDataSource(this.data);
   }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog
+  ) { }
 
 
-  tabelData;
-  columns = ['name','task','snoozed','assigned','completion','status','remarks']
+  tabelData = new MatTableDataSource<any>();
+  columns = ['name', 'task', 'snoozed', 'assigned', 'completion', 'status', 'remarks']
 
+  handleButtonClick(event) {
+
+    switch (event.text) {
+      case 'topButton':
+        this.createTask();
+
+        break;
+      case 'edit':
+        this.editTask(event.row);
+        break;
+      case 'delete':
+        this.deleteTask(event.row.id);
+        break;
+
+    }
+
+
+  }
+
+  createTask() {
+    const dialogRef = this.dialog.open(AddTaskComponent,{
+      width:'500px',
+    });
+
+    dialogRef.afterClosed().subscribe(val => {
+
+      if (val) {
+        this.data.push(val)
+        this.tabelData.data = [...this.data];
+      }
+    })
+  }
+
+  editTask(row) {
+    const dialogRef = this.dialog.open(AddTaskComponent,{
+      width:'500px',
+      data: {
+        row: row,
+        text: 'Update Task'
+      },
+    });
+  }
+
+  deleteTask(id) {
+    this.data = this.data.filter(v => v.id != id)
+    this.tabelData.data = this.data;
+  }
 
 }
